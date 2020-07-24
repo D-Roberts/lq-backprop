@@ -35,6 +35,11 @@ a = tf.convert_to_tensor(a_np)
 l, q = lq(a)
 grad = LqGrad(a, l, q, tf.ones_like(l), tf.ones_like(q))
 print(grad)
+
+tf.Tensor(
+    [[0.3512588  1.1357946 ]
+    [0.69521093 1.2315363 ]
+    [0.69521093 1.2315364 ]], shape=(3, 2), dtype=float32)
 ```
 
 # To Cite
