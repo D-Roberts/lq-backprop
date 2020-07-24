@@ -23,20 +23,70 @@
 # ==============================================================================
 
 
-"""Differentiable LQ decomposition of any matrix order."""
+"""Differentiable LQ decomposition of square, wide and deep matrices."""
 
 import numpy as np 
 import tensorflow as tf
 
 
 def lq(a, full_matrices=False):
-    """a is a tensorflow tensor.
+    """Obtain the LQ decomposition on the last two dimensions of the input tensor.
+
+    a: tensorflow tensor.
+
+    returns: L and Q matrices.
+
+    Example:
+    import tensorflow as tf 
+    import numpy as np 
+    from lq_op_grad import lq, LqGrad
+
+    np.random.seed(42)
+    a_np = np.random.uniform(-1, 1, (3, 2)).astype(np.float32)
+    a = tf.convert_to_tensor(a_np)
+    l, q = lq(a)
+    print(l, q)
+
+    tf.Tensor(
+    [[ 0.93569994  0.        ]
+     [ 0.06566572  0.49990675]
+     [-0.47832566 -0.847264  ]], shape=(3, 2), dtype=float32)
+    tf.Tensor(
+    [[-0.26816273  0.96337366]
+     [ 0.96337366  0.26816273]], shape=(2, 2), dtype=float32)
     """
+    
     res = tf.linalg.qr(tf.linalg.adjoint(a), full_matrices=full_matrices)
     return (tf.linalg.adjoint(res[1]), tf.linalg.adjoint(res[0]))
 
 
-def _LqGrad(l, q, dl, dq):
+def LqGrad(a, l, q, dl, dq):
+    """Gradient of LQ decomposition
+
+    a: tf tensor; input matrix (square, wide or deep shape)
+    l, q: tf tensors; the LQ decomposition matrices (reduced mode)
+    dl, dq: tf tensors; gradients of L and Q from upstream in compute graph
+
+    returns: tf tensor; gradient of A
+
+    Example:
+
+    import tensorflow as tf 
+    import numpy as np 
+    from lq_op_grad import lq, LqGrad
+
+    np.random.seed(42)
+    a_np = np.random.uniform(-1, 1, (3, 2)).astype(np.float32)
+    a = tf.convert_to_tensor(a_np)
+    l, q = lq(a)
+    grad = LqGrad(a, l, q, tf.ones_like(l), tf.ones_like(q))
+    print(grad)
+
+    tf.Tensor(
+    [[0.3512588  1.1357946 ]
+     [0.69521093 1.2315363 ]
+     [0.69521093 1.2315364 ]], shape=(3, 2), dtype=float32)
+    """
 
     def copyltu(M):
         # shape of M is [batch, m, m]

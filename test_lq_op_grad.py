@@ -27,7 +27,7 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 import tensorflow as tf
 
-from lq_op_grad import lq, _LqGrad 
+from lq_op_grad import lq, LqGrad 
 tf.compat.v1.disable_eager_execution()
 
 
@@ -87,7 +87,7 @@ def theoretic_q(full_mat, shape_, dtype_):
     dy_data_flat[col] = 1 
     Q_ = tf.convert_to_tensor(dy_data_flat.reshape(dy.shape))
     with sess.as_default():
-      jacobian[:, col] = _LqGrad(l, dy, 
+      jacobian[:, col] = LqGrad(atf, l, dy, 
         tf.convert_to_tensor(np.zeros(l.shape).astype(dtype_)), Q_).eval().ravel().view(jacobian.dtype)
     dy_data_flat[col] = 0
   return jacobian
@@ -108,7 +108,7 @@ def theoretic_l(full_mat, shape_, dtype_):
     dy_data_flat[col] = 1
     L_ = tf.convert_to_tensor(dy_data_flat.reshape(dy.shape))
     with sess.as_default():
-      jacobian_tl[:, col] = _LqGrad(dy, q, L_, 
+      jacobian_tl[:, col] = LqGrad(atf, dy, q, L_, 
         tf.convert_to_tensor(np.zeros(q.shape).astype(dtype_))).eval().ravel().view(jacobian_tl.dtype)
     dy_data_flat[col] = 0
   return jacobian_tl
@@ -162,15 +162,15 @@ def test():
       for rows in 3, 5:
         for cols in 3, 5:
           if rows >= cols or (not full_matrices and rows < cols):
-            for batch_dims in [(), (3,)] + [(3, 2)] * (max(rows, cols) < 10):
+             for batch_dims in [()]: 
               shape = batch_dims + (rows, cols)
               name = "%s_%s_full_%s" % (dtype_.__name__,
                                           "_".join(map(str, shape)),
                                           full_matrices)
-              # test LQ op
+              # test LQ op (forward)
               _test_LQ_op(shape, dtype_, full_matrices)
 
-              # test LQ grad
+              # test LQ grad (backward)
               if dtype_ == np.float32:
                   rtol, atol = 3e-2, 3e-2
               else:
@@ -179,6 +179,7 @@ def test():
                   numeric_l(full_matrices, shape, dtype_), atol, rtol)
               assert np.allclose(theoretic_q(full_matrices, shape, dtype_), 
                   numeric_q(full_matrices, shape, dtype_), atol, rtol)
+
 
 if __name__ == '__main__':
   import nose
