@@ -39,7 +39,7 @@ print(grad)
 
 # To Cite
 
-If you use this implementation in your research please cite (coming soon).
+If you use this implementation in your research please cite:
 
 ```
 @article{roberts2020qr,
