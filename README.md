@@ -39,11 +39,11 @@ print(grad)
 
 # To Cite
 
-If you use this implementation in your research please cite:
+If you use this implementation in your research please cite https://arxiv.org/pdf/2009.10071.pdf:
 
 ```
 @article{roberts2020qr,
-  title={QR and LQ Decomposition Matrix Backpropagation Algorithms for Square, Wide, and Deep Matrices and Their Software Implementation},
+  title={QR and LQ Decomposition Matrix Backpropagation Algorithms for Square, Wide, and Deep - Real or Complex - Matrices and Their Software Implementation},
   author={Roberts, Denisa AO and Roberts, Lucas R},
   journal={arXiv preprint arXiv:2009.10071},
   year={2020}
