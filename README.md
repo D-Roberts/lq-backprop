@@ -1,6 +1,6 @@
 # LQ Matrix Backpropagation Algorithm Implementation
 
-TensorFlow implementation of differentiable LQ matrix decomposition for square, wide and deep tensors. Addition to the code implemented in TensorFlow Core. PyTorch, and MXNet (and part of the official distributions).
+TensorFlow implementation of differentiable LQ matrix decomposition for square, wide and deep tensors. Addition to the differentiable decompositions implemented in TensorFlow Core, PyTorch, and MXNet (and part of the official distributions).
 
 # To Cite
 
