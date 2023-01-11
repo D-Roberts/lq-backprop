@@ -2,6 +2,16 @@
 
 TensorFlow implementation of differentiable LQ matrix decomposition for square, wide and deep tensors.
 
+# To Cite
+
+If you use this implementation in your research please cite (QR and LQ Decomposition Matrix Backpropagation Algorithms for Square, Wide, and Deep - Real or Complex - Matrices and Their Software Implementation)[https://arxiv.org/pdf/2009.10071.pdf]:
+
+```
+@article{roberts2020qr,
+  title={QR and LQ Decomposition Matrix Backpropagation Algorithms for Square, Wide, and Deep - Real or Complex - Matrices and Their Software Implementation},
+  author={Roberts, Denisa AO and Roberts, Lucas R},
+  journal={arXiv preprint arXiv:2009.10071},
+
 # To Use
 Requirements: tf >v1; Python > 3.6.
 
@@ -37,15 +47,6 @@ grad = LqGrad(a, l, q, tf.ones_like(l), tf.ones_like(q))
 print(grad)
 ```
 
-# To Cite
-
-If you use this implementation in your research please cite https://arxiv.org/pdf/2009.10071.pdf:
-
-```
-@article{roberts2020qr,
-  title={QR and LQ Decomposition Matrix Backpropagation Algorithms for Square, Wide, and Deep - Real or Complex - Matrices and Their Software Implementation},
-  author={Roberts, Denisa AO and Roberts, Lucas R},
-  journal={arXiv preprint arXiv:2009.10071},
   year={2020}
 }
 ```
