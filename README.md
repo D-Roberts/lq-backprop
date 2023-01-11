@@ -11,14 +11,19 @@ If you use this implementation in your research please cite (QR and LQ Decomposi
   title={QR and LQ Decomposition Matrix Backpropagation Algorithms for Square, Wide, and Deep - Real or Complex - Matrices and Their Software Implementation},
   author={Roberts, Denisa AO and Roberts, Lucas R},
   journal={arXiv preprint arXiv:2009.10071},
+  year={2020}
+}
+```
+
 
 # To Use
+```
 Requirements: tf >v1; Python > 3.6.
 
 Recommended: install Anaconda. 
 Create a tensorflow environment.
 
-```
+
 # tf cpu only; v2 by default at this time.
 
 conda create -n tf tensorflow
@@ -47,6 +52,3 @@ grad = LqGrad(a, l, q, tf.ones_like(l), tf.ones_like(q))
 print(grad)
 ```
 
-  year={2020}
-}
-```
