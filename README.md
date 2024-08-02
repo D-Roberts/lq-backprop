@@ -29,8 +29,8 @@ Create a tensorflow environment.
 conda create -n tf tensorflow
 conda activate tf
 # conda install numpy
-git clone https://github.com/D-Roberts/lq_backprop.git
-cd lq_backprop
+git clone https://github.com/D-Roberts/lq-backprop.git
+cd lq-backprop
 
 # to run tests
 conda install nose # new terminal may be necessary
