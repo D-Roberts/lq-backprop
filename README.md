@@ -2,9 +2,7 @@
 
 TensorFlow implementation of differentiable LQ matrix decomposition for square, wide and deep tensors. This is in addition to the differentiable decompositions implemented by the authors in TensorFlow Core, PyTorch, and MXNet (and part of the official distributions).
 
-## To Cite 
-
-[Update: oral presentation in the 8th International Conferance on Algorithmic Differentation (AD2024)]
+## To Cite [Update: oral presentation in the 8th International Conferance on Algorithmic Differentation (AD2024)]
 
 If you use this implementation in your research please cite (QR and LQ Decomposition Matrix Backpropagation Algorithms for Square, Wide, and Deep - Real or Complex - Matrices and Their Software Implementation)[https://arxiv.org/pdf/2009.10071.pdf]:
 
